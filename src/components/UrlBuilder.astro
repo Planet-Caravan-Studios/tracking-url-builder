@@ -1,0 +1,126 @@
+---
+import CornerBits  from '../components/CornerBits.astro';
+
+function updateURL() {
+    const baseURL = document.getElementById('baseURL').value;
+    const utmSource = document.getElementById('utmSource').value;
+    const utmMedium = document.getElementById('utmMedium').value;
+    const utmCampaign = document.getElementById('utmCampaign').value;
+    const utmTerm = document.getElementById('utmTerm').value;
+    const utmContent = document.getElementById('utmContent').value;
+
+    let url = new URL(baseURL);
+    let params = new URLSearchParams(url.search);
+
+    if (utmSource) params.set('utm_source', utmSource);
+    if (utmMedium) params.set('utm_medium', utmMedium);
+    if (utmCampaign) params.set('utm_campaign', utmCampaign);
+    if (utmTerm) params.set('utm_term', utmTerm);
+    if (utmContent) params.set('utm_content', utmContent);
+
+    url.search = params.toString();
+    document.getElementById('generatedURL').value = url.href;
+}
+---
+
+<script is:inline>
+    function ensureHttps(url) {
+        if (!url.startsWith('https://')) {
+            url = 'https://' + url;
+        }
+        return url;
+    }
+
+    function updateURL() {
+        let baseURL = document.getElementById('baseURL').value;
+        const utmSource = document.getElementById('utmSource').value;
+        const utmMedium = document.getElementById('utmMedium').value;
+        const utmCampaign = document.getElementById('utmCampaign').value;
+        const utmTerm = document.getElementById('utmTerm').value;
+        const utmContent = document.getElementById('utmContent').value;
+
+        baseURL = ensureHttps(baseURL);
+
+        let url = new URL(baseURL);
+        let params = new URLSearchParams(url.search);
+
+        if (utmSource) params.set('utm_source', utmSource);
+        if (utmMedium) params.set('utm_medium', utmMedium);
+        if (utmCampaign) params.set('utm_campaign', utmCampaign);
+        if (utmTerm) params.set('utm_term', utmTerm);
+        if (utmContent) params.set('utm_content', utmContent);
+
+        url.search = params.toString();
+        document.getElementById('generatedURL').value = url.href;
+    }
+</script>
+
+<div class="UrlBuilder">
+	<h1>Tracking URL Builder</h1>
+        <div class="formCell">
+            <label for="baseURL">Base URL:</label>
+            <input type="text" id="baseURL" placeholder="https://example.com"><br>
+        </div>
+        <div class="formCell">
+            <label for="utmSource">UTM Source:</label>
+            <input type="text" id="utmSource" placeholder="google"><br>
+        </div>
+        <div class="formCell">
+            <label for="utmCampaign">UTM Campaign:</label>
+            <input type="text" id="utmCampaign" placeholder="summer_sale"><br>
+        </div>
+        <div class="formCell">
+            <label for="utmMedium">UTM Medium:</label>
+            <input type="text" id="utmMedium" placeholder="cpc"><br>
+        </div>
+        <div class="formCell">
+            <label for="utmTerm">UTM Term:</label>
+            <input type="text" id="utmTerm" placeholder="running+shoes"><br>
+        </div>
+        <div class="formCell">
+            <label for="utmContent">UTM Content:</label>
+            <input type="text" id="utmContent" placeholder="logolink"><br>
+        </div>
+        
+        <button onclick="updateURL()">Generate URL</button><br>
+
+        <p>Generated URL:</p>
+        <textarea id="generatedURL" readonly placeholder="https://example.com/?utm_source=source_test&utm_medium=medium_test&utm_campaign=campaign_test&utm_term=term_test&utm_content=content_test" style="width: 100%;"></textarea>
+</div>
+
+
+<style lang="scss">
+	.UrlBuilder{
+        font-size: 18px;
+		border: solid 2px #000;
+        padding: 1em;
+        background-color: #FFF;
+
+        .formCell{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            //justify-content: ;
+            border-bottom: solid 2px #000;
+            margin-bottom: 1em;
+            padding-bottom: 2px;
+        }
+        label{
+            width: 50%;
+            text-align: left;
+            margin-right: 0.5em;
+        }
+        input{
+            width: 50%;
+            font-size: 1em;
+        }
+        textarea{
+            font-size: 1em;
+            padding: 0.5em;
+            height: 10em;
+        }
+	}
+
+	
+</style>
+
