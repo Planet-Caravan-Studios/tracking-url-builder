@@ -2,12 +2,12 @@
 import CornerBits  from '../components/CornerBits.astro';
 
 function updateURL() {
-    const baseURL = document.getElementById('baseURL').value;
-    const utmSource = document.getElementById('utmSource').value;
-    const utmMedium = document.getElementById('utmMedium').value;
-    const utmCampaign = document.getElementById('utmCampaign').value;
-    const utmTerm = document.getElementById('utmTerm').value;
-    const utmContent = document.getElementById('utmContent').value;
+    let baseURL = document.getElementById('baseURL').value;
+    let utmSource = document.getElementById('utmSource').value;
+    let utmMedium = document.getElementById('utmMedium').value;
+    let utmCampaign = document.getElementById('utmCampaign').value;
+    let utmTerm = document.getElementById('utmTerm').value;
+    let utmContent = document.getElementById('utmContent').value;
 
     let url = new URL(baseURL);
     let params = new URLSearchParams(url.search);
@@ -59,27 +59,27 @@ function updateURL() {
 	<h1>Tracking URL Builder</h1>
         <div class="formCell">
             <label for="baseURL">Base URL:</label>
-            <input type="text" id="baseURL" placeholder="https://example.com"><br>
+            <input type="text" id="baseURL" placeholder="https://example.com" value=""><br>
         </div>
         <div class="formCell">
             <label for="utmSource">UTM Source:</label>
-            <input type="text" id="utmSource" placeholder="google"><br>
+            <input type="text" id="utmSource" placeholder="google" value=""><br>
         </div>
         <div class="formCell">
             <label for="utmCampaign">UTM Campaign:</label>
-            <input type="text" id="utmCampaign" placeholder="summer_sale"><br>
+            <input type="text" id="utmCampaign" placeholder="summer_sale" value=""><br>
         </div>
         <div class="formCell">
             <label for="utmMedium">UTM Medium:</label>
-            <input type="text" id="utmMedium" placeholder="cpc"><br>
+            <input type="text" id="utmMedium" placeholder="cpc" value=""><br>
         </div>
         <div class="formCell">
             <label for="utmTerm">UTM Term:</label>
-            <input type="text" id="utmTerm" placeholder="running+shoes"><br>
+            <input type="text" id="utmTerm" placeholder="running+shoes" value=""><br>
         </div>
         <div class="formCell">
             <label for="utmContent">UTM Content:</label>
-            <input type="text" id="utmContent" placeholder="logolink"><br>
+            <input type="text" id="utmContent" placeholder="logolink" value=""><br>
         </div>
         
         <button onclick="updateURL()">Generate URL</button><br>
